@@ -5,22 +5,22 @@ const axios = require("axios");
 const mongoose = require("mongoose");
 
 const app = express();
-const PORT = 5000;
+const PORT = 5000; // Fixed port 5000
 
-// Allow React frontend to access
+// Allow frontend to access backend
 app.use(cors());
-app.use(express.json()); // parse JSON body
+app.use(express.json()); // Parse JSON body
 
 // -------------------- MongoDB Connection --------------------
 mongoose
   .connect(
-    "mongodb+srv://Ceaser_db:WK1WTN2RKMya1rTz@cluster0.xg46wlb.mongodb.net/appointment?retryWrites=true&w=majority&appName=Cluster0",
+    "mongodb+srv://Ceaser_db:WK1WTN2RKMya1rTz@cluster0.xg46wlb.mongodb.net/appointment?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// Schema & Model (bookings collection inside appointment DB)
+// Schema & Model for appointments
 const appointmentSchema = new mongoose.Schema({
   name: String,
   age: String,
@@ -34,7 +34,9 @@ const Appointment = mongoose.model("bookings", appointmentSchema);
 const GAS_URL =
   "https://script.google.com/macros/s/AKfycbzYNAuxHPk9LivLWm7jvSpYSaPCgBRMuZd97zJ1TJUKDzjz_26tl8ivzIoTVM4794yH/exec";
 
-// API endpoint for frontend → Save contact form to Google Sheets
+// -------------------- Routes --------------------
+
+// Contact form → save to Google Sheets
 app.post("/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -43,15 +45,14 @@ app.post("/contact", async (req, res) => {
       return res.status(400).json({ ok: false, error: "Missing fields" });
     }
 
-    // Forward data → GAS
+    // Forward data → Google Sheets
     const response = await axios.post(
       GAS_URL,
       { name, email, message },
       { headers: { "Content-Type": "application/json" } }
     );
 
-    // Send GAS response back to frontend
-    return res.json(response.data);
+    return res.json({ ok: true, data: response.data });
   } catch (err) {
     console.error("Proxy Error:", err.response?.data || err.message);
     return res.status(500).json({
@@ -62,7 +63,7 @@ app.post("/contact", async (req, res) => {
   }
 });
 
-// -------------------- Appointment Booking API --------------------
+// Appointment booking → save to MongoDB
 app.post("/api/book-appointment", async (req, res) => {
   try {
     const { name, age, email, reason } = req.body;
@@ -79,6 +80,11 @@ app.post("/api/book-appointment", async (req, res) => {
     console.error("Save failed:", err.message);
     return res.status(500).json({ ok: false, error: "Server error" });
   }
+});
+
+// Catch-all route → 404
+app.use((req, res) => {
+  res.status(404).json({ ok: false, error: "Route not found" });
 });
 
 // -------------------- Start Server --------------------

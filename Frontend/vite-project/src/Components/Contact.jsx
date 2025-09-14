@@ -5,8 +5,8 @@ const ContactForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
 
-  
-  const BACKEND_URL = "https://dr-ceaser.onrender.com";
+  // Make sure this matches your backend route
+  const BACKEND_URL = "https://dr-ceaser.onrender.com/contact";
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,10 +18,8 @@ const ContactForm = () => {
     try {
       const res = await fetch(BACKEND_URL, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
 
       const json = await res.json();
