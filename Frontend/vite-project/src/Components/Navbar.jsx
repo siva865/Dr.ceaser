@@ -16,7 +16,7 @@ function Navbar() {
     reason: "",
   });
 
-  const whatsappNumber = "918754615978"; // your WhatsApp number
+  const whatsappNumber = "919787537604"; // your WhatsApp number
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -38,7 +38,7 @@ function Navbar() {
     try {
       setSaving(true);
       // save to backend
-      await axios.post("http://localhost:5000/api/book-appointment", form);
+      await axios.post("https://dr-ceaser.onrender.com/api/book-appointment", form);
     } catch (err) {
       console.error("Save failed:", err?.response || err.message || err);
     } finally {

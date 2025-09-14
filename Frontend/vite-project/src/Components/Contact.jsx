@@ -6,7 +6,7 @@ const ContactForm = () => {
   const [success, setSuccess] = useState(null);
 
   
-  const BACKEND_URL = "http://localhost:5000/contact";
+  const BACKEND_URL = "https://dr-ceaser.onrender.com";
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
