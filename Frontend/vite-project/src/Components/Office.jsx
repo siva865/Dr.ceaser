@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-// Local photos import pannunga
+// Local photos import
 import office1 from "../assets/Images/office5.jpeg";
 import office2 from "../assets/Images/office2.jpeg";
 import office3 from "../assets/Images/office3.jpeg";
@@ -8,10 +8,12 @@ import office4 from "../assets/Images/office4.jpeg";
 import office5 from "../assets/Images/office5.jpeg";
 
 function OurOffice() {
-  const photos = [office5, office2, office3, office4, office5];
+  const photos = [office1, office2, office3, office4, office5];
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
 
-  // Auto change every 5 sec
+  // Slideshow - auto change every 5 sec
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
@@ -21,8 +23,30 @@ function OurOffice() {
     return () => clearInterval(interval);
   }, [photos.length]);
 
+  // Scroll visibility logic
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.2 } // 20% visible aana udane effect trigger
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
   return (
-    <section className="w-full py-12 bg-gradient-to-r from-[#002248] via-[#D1B48C] to-white text-center">
+    <section
+      ref={sectionRef}
+      className={`w-full py-12 bg-gradient-to-r from-[#002248] via-[#D1B48C] to-white text-center
+        transition-opacity duration-[2000ms] ease-in-out
+        ${isVisible ? "opacity-100" : "opacity-0"}`}
+    >
       <h2 className="text-3xl font-bold mb-6 text-[#002248] drop-shadow-md">
         Our Office
       </h2>

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const ContactForm = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
 
   // Make sure this matches your backend route
   const BACKEND_URL = "https://dr-ceaser.onrender.com/contact";
@@ -36,8 +38,26 @@ const ContactForm = () => {
     setLoading(false);
   };
 
+  // Scroll visibility observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#D3C6B6] via-[#8F501B] to-[#C4A380] p-6">
+    <section
+      ref={sectionRef}
+      className={`min-h-screen flex items-center justify-center bg-gradient-to-r from-[#D3C6B6] via-[#8F501B] to-[#C4A380] p-6 
+      transition-opacity duration-[2000ms] ease-in-out
+      ${isVisible ? "opacity-100" : "opacity-0"}`}
+    >
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8">
         <h2 className="text-3xl font-bold text-center text-[#8F501B] mb-6">
           Contact Us

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FaXRay,
   FaPills,
@@ -29,22 +29,50 @@ const servicesList = [
 ];
 
 export default function Service() {
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen p-6 bg-[#002248]" id="services">
+    <div
+      ref={sectionRef}
+      className="min-h-screen p-6 bg-[#002248] font-poppins"
+      id="services"
+    >
       {/* Heading */}
-      <h1 className="text-3xl font-bold mb-10 text-center text-white tracking-wide">
+      <h1
+        className={`text-3xl font-bold mb-10 text-center text-white tracking-wide transition-all duration-[1500ms] ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        }`}
+      >
         Our Services
       </h1>
 
       {/* Services Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {servicesList.map((s) => {
+        {servicesList.map((s, index) => {
           const Icon = s.icon;
           return (
             <div
               key={s.id}
-              className="p-6 bg-white rounded-2xl shadow-lg flex flex-col gap-4 items-start 
-                         transition-transform transform hover:scale-105 hover:shadow-2xl"
+              className={`p-6 bg-white rounded-2xl shadow-lg flex flex-col gap-4 items-start 
+                         transition-all duration-[1500ms] ease-in-out ${
+                           isVisible
+                             ? "opacity-100 translate-y-0"
+                             : "opacity-0 translate-y-12"
+                         }`}
+              style={{ transitionDelay: `${index * 150}ms` }} // staggered animation
             >
               <div className="p-4 bg-gradient-to-r from-[#002248] to-[#1a3d66] rounded-full text-white shadow-md">
                 <Icon size={32} />
