@@ -54,6 +54,7 @@ const ContactForm = () => {
   return (
     <section
       ref={sectionRef}
+      id="contact"
       className={`min-h-screen flex items-center justify-center bg-gradient-to-r from-[#D3C6B6] via-[#8F501B] to-[#C4A380] p-6 
       transition-opacity duration-[2000ms] ease-in-out
       ${isVisible ? "opacity-100" : "opacity-0"}`}
