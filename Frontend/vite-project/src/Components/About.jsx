@@ -52,17 +52,17 @@ const About = () => {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002248] mb-4 relative inline-block leading-snug">
             {/* Mobile → 2 lines */}
             <span className="block sm:hidden">Hello,</span>
-            <span className="block sm:hidden">I’m Dr. B.R. Ceaser</span>
+            <span className="block sm:hidden">I’m Dr.R. Ceaser</span>
 
             {/* Tablet & Desktop → Single line */}
-            <span className="hidden sm:inline">Hello, I’m Dr. B.R. Ceaser</span>
+            <span className="hidden sm:inline">Hello, I’m Dr.R. Ceaser</span>
 
             <span className="absolute bottom-[-6px] left-0 w-2/3 h-[3px] bg-[#D1B48C] rounded-full"></span>
           </h2>
 
           <p className="text-[#002248] text-base sm:text-lg md:text-lg leading-relaxed mb-6">
             I am a Consultant Physician & Diabetologist at Dr. Ceaser's Diabetes
-            Specialty Centre & Yazh CT Scans & Diagnostics in Tanjore. I
+            Specialty Centre  in Tanjore. I
             completed my MBBS from PSG Institute of Medical Sciences and
             Research, Coimbatore, followed by MD in General Medicine from
             Stanley Medical College, Chennai, and PG Dip.Diab from Annamalai

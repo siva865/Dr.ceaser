@@ -34,7 +34,7 @@ const Hero = ({ direction = "up" }) => {
     <section
       id="home"
       ref={heroRef}
-      className={`relative h-screen flex items-center justify-center text-center overflow-hidden mt-20 font-poppins 
+      className={`relative h-screen flex items-center justify-center text-center overflow-hidden mt-32 font-poppins 
       transition-all duration-[1500ms] ease-in-out
       ${isVisible ? "opacity-100 translate-x-0 translate-y-0" : `opacity-0 ${directionClasses[direction]}`}
       `}

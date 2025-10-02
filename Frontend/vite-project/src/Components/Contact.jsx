@@ -7,7 +7,7 @@ const ContactForm = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  // Make sure this matches your backend route
+  // Backend URL
   const BACKEND_URL = "https://dr-ceaser.onrender.com/contact";
 
   const handleChange = (e) => {
@@ -55,11 +55,12 @@ const ContactForm = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className={`min-h-screen flex items-center justify-center bg-gradient-to-r from-[#D3C6B6] via-[#8F501B] to-[#C4A380] p-6 
+      className={`min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#D3C6B6] via-[#8F501B] to-[#C4A380] p-6 
       transition-opacity duration-[2000ms] ease-in-out
       ${isVisible ? "opacity-100" : "opacity-0"}`}
     >
-      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8">
+      {/* Contact Form */}
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 mb-8">
         <h2 className="text-3xl font-bold text-center text-[#8F501B] mb-6">
           Contact Us
         </h2>
@@ -109,6 +110,39 @@ const ContactForm = () => {
             ❌ Something went wrong. Try again.
           </p>
         )}
+      </div>
+
+      {/* Google Map */}
+      <div className="w-full max-w-4xl h-80 mb-8">
+        <iframe
+          src="https://www.google.com/maps?q=10.7856,79.1378&hl=en&z=15&output=embed"
+          title="Google Map"
+          className="w-full h-full rounded-2xl shadow-lg border-0"
+          allowFullScreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      {/* Contact Details */}
+      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl p-8 text-center space-y-4">
+        <h3 className="text-2xl font-bold text-[#8F501B]">Our Contact</h3>
+        <p className="text-gray-700">
+          📍 Location:{" "}
+          <a
+            href="https://share.google/TxYcXa2JlrQQsgl2H"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#8F501B] font-semibold underline"
+          >
+            View on Google Maps
+          </a>
+        </p>
+        <p className="text-gray-700">
+          ☎️ Phone:{" "}
+          <a href="tel:04362228422" className="text-[#8F501B] font-semibold">
+            04362-228422
+          </a>
+        </p>
       </div>
     </section>
   );
