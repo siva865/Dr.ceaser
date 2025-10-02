@@ -64,7 +64,7 @@ function Navbar() {
 
   return (
     <>
-      {/* 🔔 Pre-Booking Notice Bar */}
+      {/* 🔔 Pre-Booking Notice Bar (always visible on load) */}
       <div className="fixed top-0 left-0 w-full bg-[#002248] text-white text-lg py-3 overflow-hidden z-[60]">
         <div className="whitespace-nowrap animate-marquee px-6">
           🔔 Pre-booking for consultations is <b>OPEN DAILY</b> from{" "}
