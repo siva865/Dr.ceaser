@@ -1,27 +1,27 @@
-@import "tailwindcss";
-
-
 /* index.css */
+
+/* Tailwind import */
+@import "tailwindcss";
 
 /* Import Poppins font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* Apply Poppins font globally */
+/* Global Styles */
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: white; /* default background */
-  color: #002248; /* default text color */
+  background-color: white;
+  color: #002248;
 }
 
-/* Optional: smooth scrolling for anchor links */
+/* Smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
 }
 
-/* Utility classes for text colors (optional) */
+/* Utility classes for text colors */
 .text-primary {
   color: #002248;
 }
@@ -30,7 +30,7 @@ html {
   color: #D1B48C;
 }
 
-/* Utility classes for background colors (optional) */
+/* Utility classes for background colors */
 .bg-primary {
   background-color: #002248;
 }
@@ -39,8 +39,7 @@ html {
   background-color: #D1B48C;
 }
 
-
-
+/* Pre-notification marquee keyframes */
 @keyframes marquee {
   0% {
     transform: translateX(100%);
@@ -50,11 +49,44 @@ html {
   }
 }
 
+/* Desktop marquee (slow) */
 .animate-marquee {
   display: inline-block;
   min-width: 100%;
   animation: marquee 20s linear infinite;
 }
 
+/* Mobile marquee (fast) */
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation: marquee 20s linear infinite; /* mobile fast scroll */
+  }
+}
 
+/* Optional: marquee text styling */
+.marquee {
+  white-space: nowrap;
+  font-weight: 500;
+}
 
+/* Input / textarea styling for forms */
+input, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-bottom: 2px solid #000;
+  background-color: #fff;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Button styling */
+button {
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Optional hover effects */
+button:hover {
+  opacity: 0.9;
+}
