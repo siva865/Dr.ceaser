@@ -53,5 +53,8 @@ html {
 .animate-marquee {
   display: inline-block;
   min-width: 100%;
-  animation: marquee 35s linear infinite;
+  animation: marquee 20s linear infinite;
 }
+
+
+
